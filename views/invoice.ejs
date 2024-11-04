@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+  </head>
+  <body>
+    <div>
+      <h1>Invoice Details</h1>
+
+      <p>
+        <strong>Document Type:</strong> <%=
+        parsedData.inference.prediction.documentType.value %>
+      </p>
+      <p>
+        <strong>Seller:</strong> <%=
+        parsedData.inference.prediction.supplierName.value %>
+      </p>
+      <p>
+        <strong>Buyer:</strong> <%=
+        parsedData.inference.prediction.customerName.value %>
+      </p>
+      <p>
+        <strong>Invoice Number:</strong> <%=
+        parsedData.inference.prediction.invoiceNumber.value %>
+      </p>
+      <p>
+        <strong>Invoice Date:</strong> <%=
+        parsedData.inference.prediction.date.value %>
+      </p>
+      <p>
+        <strong>Customer Company Registrations:</strong> <%=
+        parsedData.inference.prediction.supplierCompanyRegistrations[0].value %>
+      </p>
+      <% if (parsedData.inference.prediction.customerCompanyRegistrations &&
+      parsedData.inference.prediction.customerCompanyRegistrations.length > 0) {
+      %>
+      <p>
+        <strong>Supplier Company Registrations:</strong> <%=
+        parsedData.inference.prediction.customerCompanyRegistrations[0].value %>
+      </p>
+      <% } else { %>
+      <p>Customer Company Registrations not found.</p>
+      <% } %>
+      <p>
+        <strong>Total Amount:</strong> <%=
+        parsedData.inference.prediction.totalAmount.value %>
+      </p>
+
+      <h2>Goods/Services</h2>
+      <table border="1">
+        <tr>
+          <th>Description</th>
+          <th>HSN/SAC</th>
+          <th>GST Rate</th>
+          <th>Quantity</th>
+          <th>Unit</th>
+          <th>Amount</th>
+        </tr>
+        <% parsedData.inference.prediction.lineItems.forEach(item => { %>
+        <tr>
+          <td><%= item.description %></td>
+          <td><%= item.productCode %></td>
+          <td><%= item.taxRate %> %</td>
+          <td><%= item.quantity %></td>
+          <tc><%= item.unitPrice %></tc>
+          <td><%= item.unitMeasure %></td>
+          <td><%= item.totalAmount %></td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+  </body>
+</html>
