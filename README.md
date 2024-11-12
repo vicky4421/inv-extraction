@@ -15,6 +15,11 @@ cd inv-extraction
 npm install
 ```
 
+### 4. Create a new folder "uploads" in main directory
+```
+mkdir uploads
+```
+
 ## Running the Application
 ### 1.Start Developement Server
 ```
